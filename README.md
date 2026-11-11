@@ -14,6 +14,7 @@ Démos, travaux pratiques et slides des modules, à récupérer avec `git clone`
 
 | Module | Démos | TP | Slides |
 | --- | --- | --- | --- |
+| INFAL73 : Communication interservices au sein d'un système distribué | [demos](01%20-%20INFAL73%20-%20Communication%20interservices%20au%20sein%20d'un%20syst%C3%A8me%20distribu%C3%A9/demos) | [tp](01%20-%20INFAL73%20-%20Communication%20interservices%20au%20sein%20d'un%20syst%C3%A8me%20distribu%C3%A9/tp) | [en ligne](https://sebastien-raud.github.io/cesi_maalsi/01/) |
 
 - Chaque TP a un `README.md` (énoncé), un dossier `01-depart/` (code de départ) et un dossier `02-corrige/` quand il y en a un.
 
