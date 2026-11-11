@@ -1,0 +1,29 @@
+/* Surcharges locales, chargées après les styles d'eloc (écarts listés dans ../README.md). */
+
+/* Titres centrés même sur plusieurs lignes (eloc centre le bloc, pas le texte). */
+.slidev-layout h1,
+.slidev-layout h2 {
+  text-align: center;
+}
+
+/* Schémas sobres (noir sur transparent) : inversés en mode sombre, <img class="schema">. */
+html.dark .slidev-layout img.schema {
+  filter: invert(1);
+}
+
+/* Crédit sous une image : <p class="credit">…</p>. */
+.slidev-layout .credit {
+  margin: 0.4em 0 0;
+  font-size: 22px;
+  opacity: 0.6;
+}
+
+/* En-tête de tableau en gras (la base Slidev met font-weight: 400). */
+.slidev-layout th {
+  font-weight: 700;
+}
+
+/* Deux blocs de code consécutifs : espacés (Slidev enveloppe chaque bloc, marge forcée à 0 par eloc). */
+.slidev-layout .slidev-code-wrapper + .slidev-code-wrapper {
+  margin-top: 0.8em !important;
+}
