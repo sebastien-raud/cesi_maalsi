@@ -1,0 +1,13 @@
+name: demo-fastify
+
+services:
+  # API de notes, le code du dossier est monté dans le conteneur
+  api:
+    image: node:26-alpine
+    user: node
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: sh -c "npm install && npm start"
+    ports:
+      - "3000:3000"

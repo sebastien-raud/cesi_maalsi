@@ -1,0 +1,23 @@
+meta {
+  name: Créer un colis (201)
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/v1/parcels
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "merchant": "Vélo Boutique",
+    "recipient": "Eva Porée",
+    "address": {
+      "street": "1 rue Neuve",
+      "postalCode": "69001",
+      "city": "Lyon"
+    }
+  }
+}

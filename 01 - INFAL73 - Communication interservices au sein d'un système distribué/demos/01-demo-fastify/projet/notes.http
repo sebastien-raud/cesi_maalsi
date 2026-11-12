@@ -1,0 +1,26 @@
+# Requêtes de la démo, à lancer une par une avec l'extension REST Client (« Send Request »)
+@base = http://localhost:3000/v1
+
+### 1. Lister les notes (200)
+GET {{base}}/notes
+
+### 2. Une note existante (200)
+GET {{base}}/notes/1
+
+### 3. Une note inconnue (404)
+GET {{base}}/notes/99
+
+### 4. Créer une note (201 et en-tête Location)
+POST {{base}}/notes
+Content-Type: application/json
+
+{ "title": "Relire le TP 1" }
+
+### 5. Corps invalide : titre absent (400, réponse de Fastify)
+POST {{base}}/notes
+Content-Type: application/json
+
+{ "label": "Relire le TP 1" }
+
+### 6. Sans le préfixe de version (404, réponse de Fastify)
+GET http://localhost:3000/notes
