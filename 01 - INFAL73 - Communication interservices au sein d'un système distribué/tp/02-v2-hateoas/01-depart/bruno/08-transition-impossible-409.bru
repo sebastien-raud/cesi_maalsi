@@ -1,0 +1,17 @@
+meta {
+  name: Transition impossible (409)
+  type: http
+  seq: 8
+}
+
+patch {
+  url: {{baseUrl}}/v1/parcels/CLB-0005/status
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "status": "IN_TRANSIT"
+  }
+}

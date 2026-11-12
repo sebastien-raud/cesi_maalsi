@@ -1,0 +1,12 @@
+{
+  "name": "colibri-parcels",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --watch src/server.js",
+    "test": "node --test test/"
+  },
+  "dependencies": {
+    "fastify": "^5.12.8"
+  }
+}
