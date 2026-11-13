@@ -1,0 +1,27 @@
+# Même nom de projet pour tous les TP : lancer un TP remplace les conteneurs du précédent
+name: colibri
+
+services:
+  # Service colis (API REST), le code du dossier est monté dans le conteneur
+  parcels:
+    image: node:26-alpine
+    user: node
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: sh -c "npm install && npm start"
+    ports:
+      - "3000:3000"
+
+  # Écrans web fournis (client, livreur, central, marchand)
+  clients:
+    image: node:26-alpine
+    user: node
+    working_dir: /app
+    volumes:
+      - ../../clients:/app
+    command: sh -c "npm install && npm run dev"
+    environment:
+      PARCELS_URL: http://parcels:3000
+    ports:
+      - "5173:5173"

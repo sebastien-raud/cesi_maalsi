@@ -1,0 +1,23 @@
+meta {
+  name: Données invalides (422)
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/v1/parcels
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "merchant": "Vélo Boutique",
+    "recipient": "Eva Porée",
+    "address": {
+      "street": "1 rue Neuve",
+      "postalCode": "abc",
+      "city": "Lyon"
+    }
+  }
+}
