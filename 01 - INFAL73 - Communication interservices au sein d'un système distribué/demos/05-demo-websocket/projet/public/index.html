@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Chat</title>
+  <style>
+    body { font-family: sans-serif; max-width: 40rem; margin: 2rem auto; }
+    #status { color: gray; }
+    #messages { list-style: none; padding: 0; min-height: 10rem; }
+  </style>
+</head>
+<body>
+  <h1>Chat</h1>
+  <p id="status">connexion…</p>
+  <ul id="messages"></ul>
+  <form id="form">
+    <input id="text" autocomplete="off" placeholder="Votre message" required>
+    <button>Envoyer</button>
+  </form>
+
+  <script>
+    // Pseudo demandé à l'ouverture de l'onglet
+    const name = prompt('Votre pseudo ?') || 'anonyme';
+    const status = document.getElementById('status');
+
+    // Ouvre la connexion WebSocket sur le même serveur que la page (ws://localhost:3000)
+    const socket = new WebSocket(`ws://${location.host}`);
+
+    socket.onopen = () => { status.textContent = `connecté en tant que ${name}`; };
+    // Pas de reconnexion automatique, contrairement à EventSource
+    socket.onclose = () => { status.textContent = 'déconnecté'; };
+
+    // Message reçu du serveur : on l'ajoute à la liste
+    socket.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      const item = document.createElement('li');
+      item.textContent = `${message.name} : ${message.text}`;
+      document.getElementById('messages').append(item);
+    };
+
+    // Envoi : sur la même connexion que la réception (full-duplex)
+    document.getElementById('form').onsubmit = (event) => {
+      event.preventDefault();
+      const input = document.getElementById('text');
+      socket.send(JSON.stringify({ name, text: input.value }));
+      input.value = '';
+    };
+  </script>
+</body>
+</html>

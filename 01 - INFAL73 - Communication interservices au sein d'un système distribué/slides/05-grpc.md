@@ -10,7 +10,7 @@ Appeler un service distant comme une fonction
 
 ## L'idée du RPC
 
-<img class="schema h-80" src="./pubic/grpc-stub.svg" alt="Le code client appelle un stub, qui passe par le réseau en HTTP/2 et Protobuf jusqu'au serveur gRPC et à l'implémentation">
+<img class="schema h-80" src="./public/grpc-stub.svg" alt="Le code client appelle un stub, qui passe par le réseau en HTTP/2 et Protobuf jusqu'au serveur gRPC et à l'implémentation">
 
 RPC : Remote Procedure Call, **appel de procédure distante**
 
@@ -20,7 +20,7 @@ RPC : Remote Procedure Call, **appel de procédure distante**
 
 ## Historique du RPC
 
-<img class="schema h-130" src="./pubic/grpc-historique.svg" alt="Frise de 1976 à 2015 : RFC 707, thèse de Nelson, Xerox PARC, Sun RPC, CORBA, Java RMI, XML-RPC, Stubby, gRPC">
+<img class="schema h-130" src="./public/grpc-historique.svg" alt="Frise de 1976 à 2015 : RFC 707, thèse de Nelson, Xerox PARC, Sun RPC, CORBA, Java RMI, XML-RPC, Stubby, gRPC">
 
 <!--
 Une idée presque aussi ancienne que les réseaux : appeler du code distant comme du code local.
@@ -56,7 +56,7 @@ Le « g » ne veut pas dire Google : chaque version lui donne un sens différent
 
 ## Ce qu'apporte HTTP/2
 
-<img class="schema h-120" src="./pubic/grpc-http2.svg" alt="En HTTP/1.1, une requête à la fois par connexion ; en HTTP/2, les trames de plusieurs flux s'entrelacent sur une seule connexion">
+<img class="schema h-120" src="./public/grpc-http2.svg" alt="En HTTP/1.1, une requête à la fois par connexion ; en HTTP/2, les trames de plusieurs flux s'entrelacent sur une seule connexion">
 
 **Multiplexage**, trames binaires, en-têtes compressés (HPACK)
 
@@ -88,7 +88,7 @@ Un même contrat pour des services écrits dans **des langages différents**
 
 ## Le même message, deux formats
 
-<img class="schema h-80" src="./pubic/grpc-protobuf.svg" alt="Le message JSON fait 33 octets ; le même en Protobuf fait 13 octets, chaque champ repéré par son numéro">
+<img class="schema h-80" src="./public/grpc-protobuf.svg" alt="Le message JSON fait 33 octets ; le même en Protobuf fait 13 octets, chaque champ repéré par son numéro">
 
 Les **noms** de champs ne voyagent pas, seulement leurs **numéros**
 
@@ -109,7 +109,7 @@ Les **noms** de champs ne voyagent pas, seulement leurs **numéros**
 
 ## Quatre modes d'appel
 
-<img class="schema h-120" src="./pubic/grpc-modes.svg" alt="Unary : une requête, une réponse. Server streaming : une requête, plusieurs réponses. Client streaming : plusieurs requêtes, une réponse. Bidirectionnel : deux flux indépendants">
+<img class="schema h-120" src="./public/grpc-modes.svg" alt="Unary : une requête, une réponse. Server streaming : une requête, plusieurs réponses. Client streaming : plusieurs requêtes, une réponse. Bidirectionnel : deux flux indépendants">
 
 ---
 

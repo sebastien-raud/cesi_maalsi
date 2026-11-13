@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Chat (sans RxJS)</title>
+  <style>
+    body { font-family: sans-serif; max-width: 40rem; margin: 2rem auto; }
+    #status, #typing { color: gray; }
+    #typing { font-style: italic; min-height: 1.5em; }
+    #messages { list-style: none; padding: 0; min-height: 10rem; }
+  </style>
+</head>
+<body>
+  <h1>Chat (sans RxJS)</h1>
+  <p id="status">connexion…</p>
+  <ul id="messages"></ul>
+  <p id="typing"></p>
+  <form id="form">
+    <input id="text" autocomplete="off" placeholder="Votre message" required>
+    <button>Envoyer</button>
+  </form>
+
+  <script>
+    // Pseudo demandé à l'ouverture de l'onglet
+    const name = prompt('Votre pseudo ?') || 'anonyme';
+    const status = document.getElementById('status');
+    const input = document.getElementById('text');
+
+    // Ouvre la connexion WebSocket sur le même serveur que la page (ws://localhost:3000)
+    const socket = new WebSocket(`ws://${location.host}`);
+    const send = (message) => socket.send(JSON.stringify(message));
+
+    socket.onopen = () => { status.textContent = `connecté en tant que ${name}`; };
+    socket.onclose = () => { status.textContent = 'déconnecté'; };
+
+    // Émetteur : au plus un « typing » par seconde, avec une date de dernier envoi tenue à la main
+    let lastSent = 0;
+    input.addEventListener('input', () => {
+      const now = Date.now();
+      if (now - lastSent >= 1000) {
+        lastSent = now;
+        send({ type: 'typing', name });
+      }
+    });
+
+    // Récepteur : un minuteur par utilisateur, rangé dans une Map (pseudo -> id du minuteur)
+    const writers = new Map();
+
+    function renderTyping() {
+      const names = [...writers.keys()];
+      document.getElementById('typing').textContent =
+        names.length === 0 ? '' : `${names.join(', ')} ${names.length > 1 ? 'écrivent' : 'écrit'}…`;
+    }
+
+    socket.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+
+      // Messages du chat : ajoutés à la liste
+      if (message.type === 'message') {
+        const item = document.createElement('li');
+        item.textContent = `${message.name} : ${message.text}`;
+        document.getElementById('messages').append(item);
+      }
+
+      // Indicateur « XXX écrit… » : on ignore ses propres événements
+      if (message.name === name) return;
+
+      // Chaque événement annule le délai en cours de cet utilisateur
+      clearTimeout(writers.get(message.name));
+      if (message.type === 'typing') {
+        // Éteint après 2 s sans frappe
+        writers.set(message.name, setTimeout(() => {
+          writers.delete(message.name);
+          renderTyping();
+        }, 2000));
+      } else {
+        // Message envoyé : éteint tout de suite
+        writers.delete(message.name);
+      }
+      renderTyping();
+    };
+
+    // Envoi : sur la même connexion que la réception (full-duplex)
+    document.getElementById('form').onsubmit = (event) => {
+      event.preventDefault();
+      send({ type: 'message', name, text: input.value });
+      input.value = '';
+    };
+  </script>
+</body>
+</html>
