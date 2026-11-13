@@ -1,0 +1,8 @@
+{
+  "name": "demo-sse",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "fastify": "^5.12.8"
+  }
+}

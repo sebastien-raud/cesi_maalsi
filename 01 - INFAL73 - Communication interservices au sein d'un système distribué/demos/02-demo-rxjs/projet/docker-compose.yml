@@ -1,0 +1,10 @@
+name: demo-rxjs
+
+services:
+  # Conteneur Node pour lancer les scripts un par un (docker compose run --rm node node <script>)
+  node:
+    image: node:26-alpine
+    user: node
+    working_dir: /app
+    volumes:
+      - ./:/app

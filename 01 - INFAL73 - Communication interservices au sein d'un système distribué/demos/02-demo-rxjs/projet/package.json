@@ -1,0 +1,8 @@
+{
+  "name": "demo-rxjs",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "rxjs": "^7.8.2"
+  }
+}

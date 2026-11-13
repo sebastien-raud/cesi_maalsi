@@ -1,0 +1,15 @@
+name: demo-sse
+
+services:
+  # Serveur de citations, le code du dossier est monté dans le conteneur
+  api:
+    image: node:26-alpine
+    user: node
+    working_dir: /app
+    volumes:
+      - ./:/app
+    # exec : node reçoit le signal d'arrêt ; init : arrêt immédiat
+    command: sh -c "npm install && exec node server.js"
+    init: true
+    ports:
+      - "3000:3000"

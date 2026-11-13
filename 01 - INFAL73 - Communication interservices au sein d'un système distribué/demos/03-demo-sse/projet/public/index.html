@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Citations en direct</title>
+  <style>
+    body { font-family: sans-serif; max-width: 40rem; margin: 2rem auto; }
+    blockquote { font-size: 1.4rem; margin: 1rem 0; }
+    #status { color: gray; }
+    #history { color: gray; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <h1>Citations en direct</h1>
+  <p id="status">connexion…</p>
+  <blockquote id="quote"></blockquote>
+  <p id="author"></p>
+  <h2>Historique</h2>
+  <ol id="history" reversed></ol>
+
+  <script>
+    // Ouvre la connexion SSE ; le navigateur se reconnecte seul en cas de coupure
+    const source = new EventSource('/quotes');
+    const status = document.getElementById('status');
+
+    source.onopen = () => { status.textContent = 'connecté'; };
+    source.onerror = () => { status.textContent = 'coupure, reconnexion…'; };
+
+    // Un événement reçu : event.data contient le texte après "data:"
+    source.onmessage = (event) => {
+      const quote = JSON.parse(event.data);
+      document.getElementById('quote').textContent = quote.citation;
+      document.getElementById('author').textContent = `${quote.auteur} (événement ${event.lastEventId})`;
+
+      // Ajoute la citation en tête de l'historique
+      const item = document.createElement('li');
+      item.textContent = `${event.lastEventId} · ${quote.auteur}`;
+      document.getElementById('history').prepend(item);
+    };
+  </script>
+</body>
+</html>

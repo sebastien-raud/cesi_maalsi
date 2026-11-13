@@ -1,0 +1,72 @@
+[
+  {
+    "categorie": "Informatique et logique",
+    "auteur": "Alan Jay Perlis",
+    "citation": "En informatique, passer de l’évident à l’utile est une définition vivante du mot \"frustration\"."
+  },
+  {
+    "categorie": "Informatique et logique",
+    "auteur": "Alan Jay Perlis",
+    "citation": "On n’apprend pas l’informatique avec une calculatrice de poche, mais on peut oublier l’arithmétique."
+  },
+  {
+    "categorie": "Informatique et logique",
+    "auteur": "Bernard Werber",
+    "citation": "En informatique, la miniaturisation augmente la puissance de calcul. On peut être plus petit et plus intelligent."
+  },
+  {
+    "categorie": "Informatique et logique",
+    "auteur": "Mireille Sitbon",
+    "citation": "L'informatique fait gagner du temps, à condition d'en avoir beaucoup."
+  },
+  {
+    "categorie": "Programmation et code",
+    "auteur": "Martin Fowler",
+    "citation": "N'importe quel imbécile peut écrire un code qu'un ordinateur comprend. Les bons programmeurs écrivent du code que les humains peuvent comprendre."
+  },
+  {
+    "categorie": "Programmation et code",
+    "auteur": "Jeff Atwood",
+    "citation": "Toujours coder comme si le gars qui allait devoir maintenir votre code était un psychopathe violent qui savait où vous habitiez."
+  },
+  {
+    "categorie": "Programmation et code",
+    "auteur": "Frederick Brooks",
+    "citation": "Ajouter des gens à un projet logiciel en retard ne fait que le retarder encore plus."
+  },
+  {
+    "categorie": "Programmation et code",
+    "auteur": "Linus Torvalds",
+    "citation": "Parler ne coûte rien. Montrez-moi le code."
+  },
+  {
+    "categorie": "Cybersécurité et réalité des systèmes",
+    "auteur": "Kevin Mitnick",
+    "citation": "L’être humain est le maillon le plus faible de la sécurité ; le plus grand risque est l’ignorance."
+  },
+  {
+    "categorie": "Cybersécurité et réalité des systèmes",
+    "auteur": "Bill Gates",
+    "citation": "Le seul ordinateur vraiment sûr est un ordinateur éteint."
+  },
+  {
+    "categorie": "Cybersécurité et réalité des systèmes",
+    "auteur": "John Chambers",
+    "citation": "Il y a deux types d'entreprises : celles qui ont été piratées, et celles qui ignorent qu'elles l'ont été."
+  },
+  {
+    "categorie": "Humour",
+    "auteur": "Dave Barry",
+    "citation": "Quelle prétention de prétendre que l'informatique est récente : Adam et Ève avaient déjà un Apple !"
+  },
+  {
+    "categorie": "Humour",
+    "auteur": "Alain Rémond",
+    "citation": "Les e-mails sans réponse ne prennent pas de place."
+  },
+  {
+    "categorie": "Humour",
+    "auteur": "Edward V. Berard",
+    "citation": "Marcher sur l'eau et développer un logiciel à partir de spécifications sont faciles si les deux sont gelés."
+  }
+]
