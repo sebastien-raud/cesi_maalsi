@@ -1,0 +1,34 @@
+# Même nom de projet pour tous les TP : lancer un TP remplace les conteneurs du précédent
+name: colibri
+
+services:
+  # Central de la flotte (serveur gRPC), le code du dossier est monté dans le conteneur
+  fleet:
+    image: node:26-alpine
+    user: node
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: sh -c "npm install && npm start"
+    ports:
+      - "50051:50051"
+    # Le central est prêt quand son port répond
+    healthcheck:
+      test: ["CMD", "nc", "-z", "127.0.0.1", "50051"]
+      interval: 2s
+      retries: 60
+
+  # Simulateur de livreurs (clients gRPC), même code, autre programme
+  couriers:
+    image: node:26-alpine
+    user: node
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: npm run couriers
+    environment:
+      FLEET_ADDRESS: fleet:50051
+    # Démarre une fois le central prêt (dépendances installées, port ouvert)
+    depends_on:
+      fleet:
+        condition: service_healthy

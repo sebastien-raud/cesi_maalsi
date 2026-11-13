@@ -1,0 +1,9 @@
+{
+  "name": "demo-grpc",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.14.7",
+    "@grpc/proto-loader": "^0.8.1"
+  }
+}

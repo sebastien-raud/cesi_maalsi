@@ -1,0 +1,24 @@
+// Contrat partagé par le serveur et le client, quel que soit leur langage
+syntax = "proto3";
+
+// Espace de noms : côté JavaScript, on retrouve le service sous .demo.Thermostat
+package demo;
+
+// Un seul appel, en streaming bidirectionnel : le capteur envoie un flux de mesures,
+// le thermostat renvoie un flux de consignes ; les deux flux sont indépendants
+service Thermostat {
+  rpc Regulate (stream Measure) returns (stream Instruction);
+}
+
+// Une mesure envoyée par le capteur
+// Les numéros (= 1, = 2) identifient les champs dans le message binaire : ne jamais les changer
+message Measure {
+  string sensor_id = 1;
+  double celsius = 2;
+}
+
+// Une consigne renvoyée par le thermostat
+message Instruction {
+  string action = 1; // CHAUFFER ou REFROIDIR
+  double target = 2; // température visée
+}

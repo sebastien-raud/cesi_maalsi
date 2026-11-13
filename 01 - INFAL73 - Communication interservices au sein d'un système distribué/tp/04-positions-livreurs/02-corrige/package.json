@@ -1,0 +1,14 @@
+{
+  "name": "colibri-fleet",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --watch src/server.js",
+    "couriers": "node src/couriers.js",
+    "test": "node --test test/"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.14.7",
+    "@grpc/proto-loader": "^0.8.1"
+  }
+}

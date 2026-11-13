@@ -1,0 +1,24 @@
+// Contrat entre les livreurs et le central de Colibri
+syntax = "proto3";
+
+package colibri;
+
+// Suivi de la flotte : un flux dans chaque sens, sur une seule connexion
+service Tracking {
+  // Le livreur envoie ses positions ; le central lui renvoie des instructions quand il le décide
+  rpc Track (stream Position) returns (stream Instruction);
+}
+
+// Position d'un livreur, envoyée toutes les secondes
+message Position {
+  string courier_id = 1;
+  double latitude = 2;
+  double longitude = 3;
+  int64 sent_at = 4; // heure d'envoi, en millisecondes depuis 1970
+}
+
+// Instruction du central : un message, et la tournée recalculée (numéros de colis dans l'ordre)
+message Instruction {
+  string text = 1;
+  repeated string parcel_ids = 2;
+}

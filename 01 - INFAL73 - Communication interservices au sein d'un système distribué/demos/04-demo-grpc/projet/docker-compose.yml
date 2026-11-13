@@ -1,0 +1,33 @@
+name: demo-grpc
+
+services:
+  # Thermostat (serveur gRPC), le code du dossier est monté dans le conteneur
+  thermostat:
+    image: node:26-alpine
+    user: node
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: sh -c "npm install && exec node server.js"
+    # init : relaie Ctrl + C au serveur, qui s'arrête tout de suite au lieu d'attendre 10 s
+    init: true
+    ports:
+      - "50051:50051"
+    # Le serveur est prêt quand son port répond
+    healthcheck:
+      test: ["CMD", "nc", "-z", "127.0.0.1", "50051"]
+      interval: 2s
+      retries: 60
+
+  # Capteur (client gRPC), même code, autre programme
+  sensor:
+    image: node:26-alpine
+    user: node
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: node client.js
+    # Démarre une fois le serveur prêt (dépendances installées, port ouvert)
+    depends_on:
+      thermostat:
+        condition: service_healthy
